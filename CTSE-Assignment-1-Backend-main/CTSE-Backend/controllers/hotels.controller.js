@@ -1,12 +1,21 @@
 const Hotels = require("../models/hotels.models");
+const firebaseService = require("../firebase/firebase.service");
+const firebaseUtils = require("../firebase/firebse.util");
 
 const NewHotel = async (req, res) => {
+  const file = req.file;
+
+  const imageName = `Image_${Date.now()}`;
+  const url = firebaseUtils.generateFirebaseStorageURL(imageName);
+
+  await firebaseService.uploadToFirebase(file, imageName);
+
   try {
-    const { name, description, picture, address, phone, facilities } = req.body;
+    const { name, description, address, phone, facilities } = req.body;
     const newHotel = new Hotels({
       name,
       description,
-      picture,
+      picture: url,
       address,
       phone,
       facilities,

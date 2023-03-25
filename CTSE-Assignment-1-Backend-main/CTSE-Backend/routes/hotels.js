@@ -8,11 +8,11 @@ const {
   UpdateHotel,
   DeleteHotel,
 } = require("../controllers/hotels.controller");
-// const multerMiddleware = require("../middleware/multer.middlewear");
+const multerMiddleware = require("../middleware/multer.middlewear");
 
 HotelRouter.post(
   "/addhotel",
-  // multerMiddleware.multerUploader.single("picture"),
+  multerMiddleware.multerUploader.single("picture"),
   NewHotel
 );
 HotelRouter.get("/gethotel", GetHotel);
